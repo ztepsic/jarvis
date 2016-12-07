@@ -1,0 +1,22 @@
+{
+    "service_url": "http://localhost:5000/sensor-reading/add",
+    "device_id": 1,
+    "sensors": [
+        {
+            "id": 1,
+            "serial_no": "16031C2D4",
+            "model": "fake",
+            "gpio_pin": 4,
+            "capabilities": [
+                {
+                    "id": 1,
+                    "type": "temperature"
+                },
+                {
+                    "id": 2,
+                    "type": "humidity"
+                }
+            ]
+        }
+    ]
+}
