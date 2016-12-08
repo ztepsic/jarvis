@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
 VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{888888A0-9F3D-457C-B088-3A5042F75D52}") = "Jarvis.SvcLocal.Py", "Jarvis.SvcLocal.Py\Jarvis.SvcLocal.Py.pyproj", "{15E77C59-386C-4A87-BEA3-7F3C6CBEA184}"
+Project("{888888A0-9F3D-457C-B088-3A5042F75D52}") = "Jarvis.Svc.Py", "Jarvis.Svc.Py\Jarvis.Svc.Py.pyproj", "{15E77C59-386C-4A87-BEA3-7F3C6CBEA184}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

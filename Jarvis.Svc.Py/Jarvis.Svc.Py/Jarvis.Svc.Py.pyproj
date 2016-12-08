@@ -16,8 +16,8 @@
     <StaticUriPattern>^/static/.*</StaticUriPattern>
     <StaticUriRewrite>^/$(MSBuildProjectName)/static/.*</StaticUriRewrite>
     <PythonWsgiHandler>$(MSBuildProjectName).app</PythonWsgiHandler>
-    <Name>Jarvis.SvcLocal.Py</Name>
-    <RootNamespace>Jarvis.SvcLocal.Py</RootNamespace>
+    <Name>Jarvis.Svc.Py</Name>
+    <RootNamespace>Jarvis.Svc.Py</RootNamespace>
     <InterpreterId>{4c19fcc5-ec62-403b-9d35-4d043afcedd6}</InterpreterId>
     <InterpreterVersion>3.5</InterpreterVersion>
     <WebBrowserPort>5000</WebBrowserPort>
