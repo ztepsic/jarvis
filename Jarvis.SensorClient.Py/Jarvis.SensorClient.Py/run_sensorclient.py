@@ -2,6 +2,7 @@
 
 import json
 import sys
+import os
 import copy
 import socket
 import datetime
@@ -39,7 +40,19 @@ for sensor in config["sensors"]:
 
         readings.append(sensor_reading.__dict__)
 
-request_data = json.dumps(readings, sort_keys = True)
-print(request_data)
-response = requests.post(config["service_url"], data = request_data, headers = HEADERS)
-print(response)
+current_args = ["current", "cur"];
+if len(sys.argv) >= 2 and sys.argv[1] in current_args:
+    if(len(sys.argv) >= 3 and sys.argv[2] == "json"):
+        json_data = json.dumps(readings, sort_keys = True)
+        #json_data = json.dumps(readings, sort_keys = True, indent=4, separators=(',', ': ')) # pretty print
+        print(json_data)
+    else:
+        for reading in readings:
+            print('{0} = {1:0.1f}'.format(reading["value_type"], reading["value"]))
+
+else:
+    request_data = json.dumps(readings, sort_keys = True)
+    print(request_data)
+    response = requests.post(config["service_url"], data = request_data, headers = HEADERS)
+    print(response)
+
