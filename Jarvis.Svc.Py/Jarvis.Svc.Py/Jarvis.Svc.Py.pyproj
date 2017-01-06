@@ -35,6 +35,9 @@
     <Compile Include="jarvis_svc\csv_helper.py">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="jarvis_svc\default_settings.py">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="jarvis_svc\sensor_reading.py">
       <SubType>Code</SubType>
     </Compile>
@@ -43,11 +46,13 @@
     <Compile Include="jarvis_svc\views.py" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="instance\" />
     <Folder Include="jarvis_svc\" />
     <Folder Include="jarvis_svc\templates\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Filesystem.pubxml" />
+    <Content Include="instance\app.cfg" />
     <Content Include="jarvis_svc\templates\sensor_reading.html" />
     <Content Include="requirements.txt" />
     <Content Include="jarvis_svc\templates\index.html" />

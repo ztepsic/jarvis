@@ -36,8 +36,7 @@ def home():
 def current_reading():
     """Renders current reading of local sensor"""
 
-    command = "python /home/pi/jarvis/Jarvis.SensorClient/run_sensorclient.py cur json";
-    output = os.popen(command,'r',1)
+    output = os.popen(app.config["SENSOR_READ_CMD"],"r",1)
     json_data = output.read()
     readings = json.loads(json_data)
     return render_template(

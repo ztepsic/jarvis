@@ -1,0 +1,1 @@
+SENSOR_READ_CMD = "python run_sensorclient.py cur json"
