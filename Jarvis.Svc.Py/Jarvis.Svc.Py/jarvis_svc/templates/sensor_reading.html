@@ -1,0 +1,15 @@
+{% extends "layout.html" %}
+
+{% block content %}
+
+<dl>
+    {% for sensor_reading in content %}
+    <dt>Timestamp</dt>
+    <dd>{{  format_datetime(sensor_reading.timestamp) }}</dd>
+   
+    <dt>{{sensor_reading.value_type}}</dt>
+    <dd>{{sensor_reading.value}}</dd>
+    {% endfor %}
+</dl>
+
+{% endblock %}

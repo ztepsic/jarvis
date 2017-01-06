@@ -2,6 +2,10 @@
 Routes and views for the flask application.
 """
 
+import sys
+import os
+import json
+
 from datetime import datetime
 from flask import render_template
 from jarvis_svc import app
@@ -11,6 +15,11 @@ from flask import Response
 from jarvis_svc.sensor_reading import SensorReading
 from jarvis_svc.csv_helper import CsvHelper
 
+@app.context_processor
+def utility_processor():
+    def format_datetime(str_datetime):
+        return datetime.strptime(str_datetime, '%Y-%m-%dT%H:%M:%S:%f').strftime("%Y-%m-%d %H:%M:%S")
+    return dict(format_datetime=format_datetime)
 
 @app.route('/')
 @app.route('/home')
@@ -19,8 +28,22 @@ def home():
 
     return render_template(
         'index.html',
-        title='Home Page',
-        year=datetime.now().year,
+        title='Jarvis'
+    )
+
+@app.route("/cur")
+@app.route("/current")
+def current_reading():
+    """Renders current reading of local sensor"""
+
+    command = "python /home/pi/jarvis/Jarvis.SensorClient/run_sensorclient.py cur json";
+    output = os.popen(command,'r',1)
+    json_data = output.read()
+    readings = json.loads(json_data)
+    return render_template(
+        'sensor_reading.html',
+        title='Jarvis',
+        content=readings
     )
 
 @app.route("/sensor-reading/add", methods = ["POST"])
