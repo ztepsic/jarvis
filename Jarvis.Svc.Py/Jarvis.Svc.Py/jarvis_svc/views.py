@@ -45,6 +45,14 @@ def current_reading():
         content=readings
     )
 
+@app.route("/cur/json")
+@app.route("/current/json")
+def current_reading_json():
+    """Renders current reading of local sensor and returns it in json form"""
+    output = os.popen(app.config["SENSOR_READ_CMD"],"r",1)
+    json_data = output.read()
+    return json_data, 200, {'Content-Type': 'application/json'}
+
 @app.route("/sensor-reading/add", methods = ["POST"])
 def sensor_reading_add():
     """Adds sensor reading"""
