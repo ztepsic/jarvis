@@ -11,7 +11,7 @@ from jarvis_sensorclient.device_info import DeviceInfo
 from jarvis_sensorclient.sensor_reading import SensorReading
 from jarvis_sensorclient.sensor_reader import SensorReader
 
-TIMESTAMP_FORMAT = "{:%Y-%m-%dT%H:%M:%S:%f}"
+TIMESTAMP_FORMAT = "{:%Y-%m-%dT%H:%M:%S.%f}"
 HEADERS = { "content-type": "application/json" }
 
 base_path = os.path.realpath(os.path.join(os.getcwd(), os.path.dirname(__file__)))
