@@ -1,0 +1,28 @@
+{
+    "wifi_ssid": "ssid",
+    "wifi_pass": "pass",
+    "service_url": "http://localhost:5000/sensor-reading/add",
+    "send_sensor_reading_interval": 300000
+    "device_id": 2,
+    "sensors": [
+        {
+            "id": 2,
+            "serial_no": "16031C2D4",
+            "model": "fake",
+            "gpio_pin": 2,
+            "capabilities": [
+                {
+                    "id": 1,
+                    "type": "temperature"
+                },
+                {
+                    "id": 2,
+                    "type": "humidity"
+                }
+            ]
+        }
+    ],
+    "timezone": 1,
+    "daylightOffset": 1,
+    "ntps": ["pool.ntp.org", "time.nist.gov"]
+}
