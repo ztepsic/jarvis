@@ -9,7 +9,7 @@ create table dbo.SensorReadings (
 ,	SensorId int not null
 ,	ReadingDateTime datetime2 not null
 ,	ValueTypeId int not null
-,	Value decimal
+,	Value decimal(18, 5)
 ,	constraint FK_SensorReadings_RoomId
 		foreign key (RoomId) references dbo.Rooms(Id)
 			on delete no action
