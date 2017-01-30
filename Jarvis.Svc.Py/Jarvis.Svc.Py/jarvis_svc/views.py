@@ -18,7 +18,7 @@ from jarvis_svc.csv_helper import CsvHelper
 @app.context_processor
 def utility_processor():
     def format_datetime(str_datetime):
-        return datetime.strptime(str_datetime, '%Y-%m-%dT%H:%M:%S:%f').strftime("%Y-%m-%d %H:%M:%S")
+        return datetime.strptime(str_datetime, '%Y-%m-%dT%H:%M:%S.%f').strftime("%Y-%m-%d %H:%M:%S")
     return dict(format_datetime=format_datetime)
 
 @app.route('/')
