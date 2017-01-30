@@ -3,6 +3,7 @@
 # =================
 
 temp/
+Jarvis.SensorClient.ESP8266-Arduino/Jarvis.SensorClient/data/
 
 
 # ================
