@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 14
-VisualStudioVersion = 14.0.25420.1
+# Visual Studio 15
+VisualStudioVersion = 15.0.28307.902
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{888888A0-9F3D-457C-B088-3A5042F75D52}") = "Jarvis.SensorClient.Py", "Jarvis.SensorClient.Py\Jarvis.SensorClient.Py.pyproj", "{371C9842-FCBB-4C1C-9793-78C2F6C776F8}"
 EndProject
@@ -16,5 +16,8 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {0E2D3F4F-C4A9-4DE4-9DD6-4E9D240DD660}
 	EndGlobalSection
 EndGlobal

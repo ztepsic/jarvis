@@ -6,7 +6,9 @@ class SensorReading(object):
     host = None
     sensor_id = None
     sensor_serial_no = None
+    location = None
     timestamp = None
+    unix_timestamp = None
     value = None
     value_type_id = None
     value_type = None

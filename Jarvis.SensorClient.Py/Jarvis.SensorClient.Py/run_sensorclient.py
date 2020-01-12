@@ -6,6 +6,7 @@ import os
 import copy
 import socket
 import datetime
+import time
 import requests
 from jarvis_sensorclient.device_info import DeviceInfo
 from jarvis_sensorclient.sensor_reading import SensorReading
@@ -27,13 +28,16 @@ sensor_reading_base.host = socket.gethostname()
 readings = []
 for sensor in config["sensors"]:
     reading_timestamp = TIMESTAMP_FORMAT.format(datetime.datetime.now())
+    reading_unix_timestamp = int(time.time())
 
     values = SensorReader.read(sensor["model"], sensor["gpio_pin"])
     for value_type, value in values.items():
         sensor_reading = copy.deepcopy(sensor_reading_base)
         sensor_reading.sensor_id = sensor["id"]
         sensor_reading.sensor_serial_no = sensor["serial_no"]
+        sensor_reading.location = sensor["location"]
         sensor_reading.timestamp = reading_timestamp
+        sensor_reading.unix_timestamp = reading_unix_timestamp
         sensor_reading.value = value
         sensor_reading.value_type = value_type
         sensor_reading.value_type_id = next((item for item in sensor["capabilities"] if item["type"] == value_type),  None)["id"]

@@ -13,7 +13,7 @@ class SensorReader(object):
             sensor = sensors[sensor_model]
             humidity, temperature = Adafruit_DHT.read_retry(sensor, pin)
             
-            values["humidity"] = humidity
+            values["humidity"] = round(humidity, 2)
             values["temperature"] = round(temperature, 2)
             
         if sensor_model == "fake":

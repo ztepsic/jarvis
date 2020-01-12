@@ -5,10 +5,21 @@
 <dl>
     {% for sensor_reading in content %}
     <dt>Timestamp</dt>
-    <dd>{{  format_datetime(sensor_reading.timestamp) }}</dd>
-   
+    <dd>{{format_datetime(sensor_reading.timestamp)}}</dd>
+
+    <dt>Location</dt>
+    <dd>{{sensor_reading.location}}</dd>
+
     <dt>{{sensor_reading.value_type}}</dt>
-    <dd>{{sensor_reading.value}}</dd>
+    <dd>
+        {{sensor_reading.value}}
+
+        {% if sensor_reading.value_type == "temperature" %}
+        °C
+        {% else %}
+        %
+        {% endif %}
+    </dd>
     {% endfor %}
 </dl>
 
