@@ -6,6 +6,7 @@ import sys
 import os
 import json
 import requests
+import threading
 
 from datetime import datetime
 from flask import render_template
@@ -35,13 +36,17 @@ def home():
 @app.route("/cur")
 @app.route("/current")
 def current_reading():
-    """Renders current reading of local sensor"""
+    """Renders current reading of local sensor and writes to CSV file"""
 
     output = os.popen(app.config["SENSOR_READ_CMD"],"r",1)
     json_data = output.read()
     sensor_readings_jdata = json.loads(json_data)
-    for sensor_reading_jdata in sensor_readings_jdata:
-        send_to_influxdb_cloud(map_dict_values_to_sensor_reading(sensor_reading_jdata))
+    if not isinstance(sensor_readings_jdata, list):
+        sensor_readings_jdata = [sensor_readings_jdata]
+
+    thread = threading.Thread(target=write_to_csv, args=(sensor_readings_jdata,))
+    thread.deamon = True
+    thread.start()
 
     return render_template(
         'sensor_reading.html',
@@ -65,6 +70,15 @@ def sensor_reading_add():
     if not isinstance(sensor_readings_jdata, list):
         sensor_readings_jdata = [sensor_readings_jdata]
 
+    thread = threading.Thread(target=write_to_csv, args=(sensor_readings_jdata,))
+    thread.deamon = True
+    thread.start()
+    
+    return Response(None, status=200, mimetype='application/json')
+
+def write_to_csv(sensor_readings_jdata):
+    """Writes sensor readings JSON data to CSV file"""
+
     sensor_readings = []
     if set(("device_id", "device_ext_id", "host", "sensor_id", "sensor_serial_no", "location", "timestamp", "unix_timestamp", "value", "value_type_id", "value_type")).issubset(sensor_readings_jdata[0]):
         for sensor_reading_jdata in sensor_readings_jdata:
@@ -75,8 +89,6 @@ def sensor_reading_add():
 
 
     if sensor_readings:
-
-
         # Try to insert to database or send to another service
             # if insert to database or sending to another service is successful
                 # read csv files and insert them to database or send to another service
@@ -91,11 +103,10 @@ def sensor_reading_add():
             data.append(sensor_reading.__dict__)
 
         CsvHelper.write_to_csv(csv_filename, filednames_header, data)
-        
-    
-    return Response(None, status=200, mimetype='application/json')
 
 def map_dict_values_to_sensor_reading(sensor_reading_jdata):
+    """Maps JSON sensor reading data to SensorReading class instance"""
+
     sensor_reading = SensorReading()
     sensor_reading.device_id = sensor_reading_jdata["device_id"]
     sensor_reading.device_ext_id = sensor_reading_jdata["device_ext_id"]
