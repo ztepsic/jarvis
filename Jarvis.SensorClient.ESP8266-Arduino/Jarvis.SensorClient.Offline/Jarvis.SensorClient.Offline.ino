@@ -1,4 +1,5 @@
 #include <ESP8266WiFi.h>
+#include <random>
 
 #include "DHT.h"
 
@@ -49,6 +50,11 @@ static const unsigned char PROGMEM logo_bmp[] =
   B01110000, B01110000,
   B00000000, B00110000 };
 
+std::random_device seeder;
+std::mt19937 rng(seeder());
+std::uniform_int_distribution<int> genXPos(0, 12); // uniform, unbiased
+std::uniform_int_distribution<int> genYPos(0, 16); // uniform, unbiased
+
 void setup() {
   Serial.begin(9600);
   Serial.println(F("DHTxx test!"));
@@ -75,6 +81,7 @@ void setup() {
   dht.begin();
 
   // text display tests
+  display.dim(true); // Dim the display.
   display.setTextSize(1);
   display.setTextColor(WHITE);
   display.setCursor(0,0);
@@ -117,12 +124,21 @@ void loop() {
   Serial.print(F("Humidity: "));
   Serial.print(h);
   Serial.print(F(" %"));
+
+  // generate random coordinates for display to prevend OLED burn in
+  int xPos = genXPos(rng);
+  int yPos = genYPos(rng);
+
+  Serial.print(F("\t x,y:"));
+  Serial.print(xPos);
+  Serial.print(F(","));
+  Serial.println(yPos);
   
   Serial.println();
 
   //display.invertDisplay(true);
   display.setTextColor(WHITE);
-  display.setCursor(12,16); // default 0,0
+  display.setCursor(xPos,yPos); // default 0,0 or 12,16
   
   display.setTextSize(1.8);
   display.print("T: ");
@@ -135,7 +151,7 @@ void loop() {
 
   display.println();
   
-  display.setCursor(12,48);
+  display.setCursor(xPos,32+yPos); // 12,48
   display.setTextSize(1.8);
   display.print("H: ");
   display.setTextSize(2);
