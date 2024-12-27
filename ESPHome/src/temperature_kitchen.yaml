@@ -1,0 +1,8 @@
+substitutions:
+  devicename: temperature
+  location_id: kitchen
+  location_name: Kitchen
+  local_domain: sfera
+  dht_pin: D4
+
+<<: !include esp8266/temperature.yaml

@@ -1,0 +1,33 @@
+esphome:
+  name: ${devicename}-${location_id}
+
+esp8266:
+  board: nodemcuv2
+
+<<: !include ../.base.yaml
+
+spi:
+  clk_pin: D5 # D0/SCK/SCL
+  mosi_pin: D6 # D1/MOSI/SDA
+
+display:
+  - platform: ssd1306_spi
+    model: "SSD1306 128x64"
+    id: my_display
+    cs_pin: D1
+    dc_pin: D8
+    reset_pin: D7
+    contrast: 50%
+    update_interval: 10s
+    lambda: |-
+      int x = random(0, 12);  // Generates a random number from 0 to 12
+      int y = random(0, 8);  // Generates a random number from 0 to 8
+
+      // Display temperature
+      it.printf(x, y, id(roboto_24), "T: %.1f°C", id(temperature).state);
+
+      // Display humidity
+      it.printf(x, 32 + y, id(roboto_24), "H: %.1f%%", id(humidity).state);
+
+font: !include ../fonts/roboto_24.yaml
+sensor: !include ../sensors/dht22.yaml

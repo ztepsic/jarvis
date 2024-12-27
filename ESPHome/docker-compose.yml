@@ -1,0 +1,18 @@
+services:
+  esphome:
+    container_name: esphome
+    image: ghcr.io/esphome/esphome:2024.12
+    volumes:
+      - ${CONFIG_SRC}:/config
+      # - /etc/localtime:/etc/localtime:ro
+    ports:
+      - 6052:6052
+    restart: always
+    privileged: true
+    devices:
+      - ${USB_SRC}:/dev/ttyUSB0
+    # network_mode: host
+    environment:
+      - USERNAME=${DASH_USERNAME}
+      - PASSWORD=${DASH_PASSWORD}
+      - ESPHOME_DASHBOARD_USE_PING=true

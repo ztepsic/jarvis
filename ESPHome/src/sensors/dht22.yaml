@@ -1,0 +1,16 @@
+platform: dht
+model: DHT22
+pin: ${dht_pin}
+temperature:
+  name: "${location_name} Temperature"
+  id: temperature
+  on_value:
+    - lambda: |-
+        ESP_LOGI("main", "Temperature value updated: %.1f°C", x);
+humidity:
+  name: "${location_name} Humidity"
+  id: humidity
+  on_value:
+    - lambda: |-
+        ESP_LOGI("main", "Humidity value updated: %.1f%", x);
+update_interval: 60s
