@@ -13,7 +13,7 @@ ota:
 wifi:
   ssid: !secret wifi_ssid
   password: !secret wifi_password
-  use_address: ${devicename}-${location_name}.${local_domain}
+  use_address: ${devicename}-${location_id}.${local_domain}
 
   # Enable fallback hotspot (captive portal) in case wifi connection fails
   ap:
