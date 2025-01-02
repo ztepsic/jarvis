@@ -2,7 +2,7 @@ substitutions:
   devicename: temperature
   location_id: livingroom
   location_name: Living Room
-  local_domain: sfera
+  local_domain: !secret local_domain
   dht_pin: D4
 
 <<: !include esp8266/temperature.yaml
